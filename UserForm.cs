@@ -17,7 +17,7 @@ namespace GraphApp
 
         // input fields
         private TextBox txtGraphID, txtVertexID, txtVX, txtVY;
-        private TextBox txtEdgeID, txtFromV, txtToV;
+        private TextBox txtGraphID2, txtEdgeID, txtFromV, txtToV;
         private TextBox txtCopyID;
         private TextBox txtUpdateType, txtUpdateID, txtUpdateX, txtUpdateY;
 
@@ -69,11 +69,12 @@ namespace GraphApp
 
             int top = 165;
 
-            // create grapgh
+            // create graph
             AddSectionLabel("CREATE GRAPH", 520, top); top += 22;
-            var btnCreate = new Button { Text = "Create New Graph", Location = new Point(520, top), Width = 150 };
+            var btnCreate = new Button { Text = "Create New Graph", Location = new Point(520, top), Width = 150, Height = 32 };
             btnCreate.Click += BtnCreate_Click;
             Controls.Add(btnCreate);
+            btnCreate.BringToFront();
             top += 35;
 
             // add vertex
@@ -82,23 +83,26 @@ namespace GraphApp
             txtVertexID = AddTextBox(575, top, 50, "VID");
             txtVX = AddTextBox(630, top, 50, "X");
             txtVY = AddTextBox(685, top, 50, "Y");
-            var btnAddV = new Button { Text = "Add Vertex", Location = new Point(740, top), Width = 90 };
+            var btnAddV = new Button { Text = "Add Vertex", Location = new Point(740, top), Width = 90, Height = 32 };
             btnAddV.Click += BtnAddVertex_Click;
             Controls.Add(btnAddV);
+            btnAddV.BringToFront();
             top += 35;
 
             // add edge
             AddSectionLabel("ADD EDGE  [Graph ID | Edge ID | From VID | To VID]", 520, top); top += 22;
-            txtEdgeID = AddTextBox(520, top, 50, "EID");
-            txtFromV = AddTextBox(575, top, 50, "From");
-            txtToV = AddTextBox(630, top, 50, "To");
-            var btnAddE = new Button { Text = "Add Edge", Location = new Point(685, top), Width = 90 };
+            txtGraphID2 = AddTextBox(520, top, 50, "GID");
+            txtEdgeID = AddTextBox(575, top, 50, "EID");
+            txtFromV = AddTextBox(630, top, 50, "From");
+            txtToV = AddTextBox(685, top, 50, "To");
+            var btnAddE = new Button { Text = "Add Edge", Location = new Point(740, top), Width = 90, Height = 32 };
             btnAddE.Click += BtnAddEdge_Click;
             Controls.Add(btnAddE);
+            btnAddE.BringToFront();
             // reuse txtGraphID for graph id - add a separate one
-            var lblNote = new Label { Text = "(uses Graph ID above)", Location = new Point(520, top + 25), AutoSize = true, ForeColor = Color.Gray, Font = new Font("Arial", 7) };
-            Controls.Add(lblNote);
-            top += 50;
+            // var lblNote = new Label { Text = "(uses Graph ID above)", Location = new Point(520, top + 25), AutoSize = true, ForeColor = Color.Gray, Font = new Font("Arial", 7) };
+            // Controls.Add(lblNote);
+            top += 35;
 
             // update vertex
             AddSectionLabel("UPDATE VERTEX  [Graph ID | Vertex ID | New X | New Y]", 520, top); top += 22;
@@ -106,29 +110,32 @@ namespace GraphApp
             txtUpdateID = AddTextBox(575, top, 50, "VID");
             txtUpdateX = AddTextBox(630, top, 50, "X");
             txtUpdateY = AddTextBox(685, top, 50, "Y");
-            var btnUpdV = new Button { Text = "Update Vertex", Location = new Point(740, top), Width = 110 };
+            var btnUpdV = new Button { Text = "Update Vertex", Location = new Point(740, top), Width = 140, Height = 32 };
             btnUpdV.Click += BtnUpdateVertex_Click;
             Controls.Add(btnUpdV);
+            btnUpdV.BringToFront();
             top += 35;
 
             // copy graph
             AddSectionLabel("COPY GRAPH  [Source Graph ID]", 520, top); top += 22;
             txtCopyID = AddTextBox(520, top, 60, "Graph ID");
-            var btnCopy = new Button { Text = "Copy Graph", Location = new Point(585, top), Width = 100 };
+            var btnCopy = new Button { Text = "Copy Graph", Location = new Point(585, top), Width = 100, Height = 32 };
             btnCopy.Click += BtnCopy_Click;
             Controls.Add(btnCopy);
+            btnCopy.BringToFront();
             top += 35;
 
             // display
             AddSectionLabel("DISPLAY GRAPH  [Graph ID — or double-click list]", 520, top); top += 22;
             var txtDisplayID = new TextBox { Location = new Point(520, top), Width = 60, PlaceholderText = "GID" };
             Controls.Add(txtDisplayID);
-            var btnDisplay = new Button { Text = "Display", Location = new Point(585, top), Width = 80 };
+            var btnDisplay = new Button { Text = "Display", Location = new Point(585, top), Width = 80, Height = 32 };
             btnDisplay.Click += (s, e) =>
             {
                 if (int.TryParse(txtDisplayID.Text, out int id)) DisplayGraph(id);
             };
             Controls.Add(btnDisplay);
+            btnDisplay.BringToFront();
 
             RefreshList();
         }
@@ -146,12 +153,14 @@ namespace GraphApp
                 ForeColor = Color.DarkSlateBlue
             };
             Controls.Add(lbl);
+            lbl.BringToFront();
         }
 
         private TextBox AddTextBox(int x, int y, int width, string placeholder)
         {
             var tb = new TextBox { Location = new Point(x, y), Width = width, PlaceholderText = placeholder };
             Controls.Add(tb);
+            tb.BringToFront();
             return tb;
         }
 
